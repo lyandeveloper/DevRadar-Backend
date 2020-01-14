@@ -9,6 +9,7 @@ class Database {
     this.mongoConnection = mongoose.connect(
       'mongodb+srv://omnistack:admin@cluster0-3vuws.mongodb.net/week10?retryWrites=true&w=majority',
       {
+        useCreateIndex: true,
         useNewUrlParser: true,
         useUnifiedTopology: true,
       }
