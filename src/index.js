@@ -1,20 +1,10 @@
 import express from 'express';
-import mongoose from 'mongoose';
+import routes from './routes';
 
-mongoose.connect(
-  'mongodb+srv://omnistack:admin@cluster0-3vuws.mongodb.net/week10?retryWrites=true&w=majority',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  }
-);
+import './database';
 
 const app = express();
 
 app.use(express.json());
-
-app.post('/users', (req, res) => {
-  return res.json({ message: 'Hello World' });
-});
-
+app.use(routes);
 app.listen(3333);
