@@ -51,6 +51,12 @@ class DevController {
 
     return res.json(dev);
   }
+
+  async delete(req, res) {
+    const dev = await Dev.findByIdAndRemove(req.params._id);
+
+    res.send(dev);
+  }
 }
 
 export default new DevController();
