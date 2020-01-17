@@ -43,6 +43,14 @@ class DevController {
 
     return res.json(dev);
   }
+
+  async update(req, res) {
+    const dev = await Dev.findByIdAndUpdate(req.params._id, req.body, {
+      new: true,
+    });
+
+    return res.json(dev);
+  }
 }
 
 export default new DevController();
