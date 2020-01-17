@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Dev from '../models/Dev';
-
 import parseStringAsArray from '../../utils/parseStringAsArray';
+import { findConnections, sendMessage } from '../../websocket';
 
 class DevController {
   async index(req, res) {
@@ -37,6 +37,15 @@ class DevController {
         techs: techsArray,
         location,
       });
+
+      // Filtrar as conexões que estão à no máximo 10km de distância
+      // e que o novo dev tenha pelo menos uma das tecnologias filtradas
+      const sendSocketMessageTo = findConnections(
+        { latitude, longitude },
+        techsArray
+      );
+
+      sendMessage(sendSocketMessageTo, 'new-dev', dev);
     } else {
       return res.status(404).json({ error: 'The dev already exists' });
     }
